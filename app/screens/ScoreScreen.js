@@ -30,11 +30,53 @@ const ScoreScreen = () => {
     }
   };
 
+  const handlePlayFinsih = () => {
+    setAccumulate({
+      left: 0,
+      right: 0,
+    });
+    setScores({
+      left: 0,
+      right: 0,
+    });
+  };
+
+  const handleSetFinish = () => {
+    let left = 0;
+    let right = 0;
+    if (scores.left > scores.right) {
+      left = 1;
+    } else if (scores.right > scores.left) {
+      right = 1;
+    }
+
+    setAccumulate({
+      left: accumulate.right + right,
+      right: accumulate.left + left,
+    });
+    setScores({
+      left: 0,
+      right: 0,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Score score={scores.left} onPress={() => changeScore('left')} />
-      <Menu accumulate={accumulate} />
-      <Score score={scores.right} onPress={() => changeScore('right')} />
+      <Score
+        style={styles.leftScore}
+        score={scores.left}
+        onPress={() => changeScore('left')}
+      />
+      <Menu
+        accumulate={accumulate}
+        handlePlayFinsih={handlePlayFinsih}
+        handleSetFinish={handleSetFinish}
+      />
+      <Score
+        style={styles.rightScore}
+        score={scores.right}
+        onPress={() => changeScore('right')}
+      />
     </SafeAreaView>
   );
 };
@@ -47,6 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'nowrap',
     backgroundColor: '#fff',
+  },
+  leftScore: {
+    backgroundColor: '#ffe2ed',
+  },
+  rightScore: {
+    backgroundColor: '#cce8f4',
   },
 });
 
