@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, TouchableWithoutFeedback, Text, View } from 'react-native';
 
-const Score = ({ score, onPress }) => {
+const Score = ({ style, score, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <Text style={styles.text}>{score}</Text>
       </View>
     </TouchableWithoutFeedback>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: 60,
+    fontSize: 80,
     fontWeight: '500',
     color: '#000',
     align: 'center',
